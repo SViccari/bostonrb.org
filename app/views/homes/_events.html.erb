@@ -1,31 +1,34 @@
 <section>
   <div class="events-container">
-    <div class="upcoming-event-content">
-      <div class="upcoming-event-details">
-        <p class="upcoming-event-title">
-          Our next event
-        </p>
-        <p class="upcoming-event-header">
-          <strong>Meeting</strong> (second Tuesday of every month)
-        </p>
-        <div class="upcoming-event-date">
-          <span>
-            February 3, 2018</br>
-            6:45PM to 10:00PM
-          </span>
+    <% if @upcoming_event %>
+      <div class="upcoming-event-content">
+        <div class="upcoming-event-details">
+          <p class="upcoming-event-title">
+            Our next event
+          </p>
+          <p class="upcoming-event-header">
+            <strong><%= @upcoming_event.name %></strong>
+          </p>
+          <div class="upcoming-event-date">
+            <span>
+              <%= @upcoming_event.starts_at.in_time_zone("America/New_York").to_date.to_s(:long) %></br>
+              <%= @upcoming_event.starts_at.in_time_zone("America/New_York").strftime("%l:%M%p") %> to
+              <%= @upcoming_event.ends_at.in_time_zone("America/New_York").strftime("%l:%M%p") %>
+            </span>
+          </div>
+          <div class="upcoming-event-location">
+            <span>
+              <%= @upcoming_event.venue_name %></br>
+              <%= @upcoming_event.address_1 %></br>
+              <%= @upcoming_event.city %>, <%= @upcoming_event.state %>
+            </span>
+          </div>
+          <div class="upcoming-event__buttons">
+            <%= link_to("RSVP", "#", class: "upcoming-event__button") %>
+            <%= link_to("See all events", "#", class: "upcoming-event__button") %>
+          </div>
         </div>
-        <div class="upcoming-event-location">
-          <span>
-            ezCater</br>
-            101 Arch St, 15th Floor</br>
-            Boston, MA
-          </span>
-        </div>
-        <div class="upcoming-event__buttons">
-          <%= link_to("RSVP", "#", class: "upcoming-event__button") %>
-          <%= link_to("See all events", "#", class: "upcoming-event__button") %>
-        </div>
-      </div>
+      <% end %>
     </div>
 
     <div class="event-types">
